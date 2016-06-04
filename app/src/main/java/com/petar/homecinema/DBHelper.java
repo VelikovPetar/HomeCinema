@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "MovieDatabase.db";
     public static final String MOVIES_TABLE_NAME = "movies";
-    public static final String MOVIES_COLUMN_ID = "id";
+    public static final String MOVIES_COLUMN_ID = "_id";
     public static final String MOVIES_COLUMN_TITLE = "title";
     public static final String MOVIES_COLUMN_ACTORS = "actors";
     public static final String MOVIES_COLUMN_DIRECTOR = "director";
