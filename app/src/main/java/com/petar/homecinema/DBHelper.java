@@ -55,6 +55,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      * @param title keyword to be searched
      * @return ArrayList containing movies which have the parameter title in their "title" column
+     * TODO: To be tested!
      * TODO: To be modified to directly display the fetched data into a ListView. (MAYBE)
      */
     public ArrayList<Movie> searchByTitle(String title) {
@@ -62,7 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String getMoviesByTitle = "select * from " + MOVIES_TABLE_NAME + " where " + MOVIES_COLUMN_TITLE + " like " + "'%" + title + "%';";
         Cursor cursor = db.rawQuery(getMoviesByTitle, null);
-        //cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, "where title like '%?%'", new String[]{title}, null, null, null);
+        //cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, "title like '%?%'", new String[]{title}, null, null, null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()) {
             Movie movie = new Movie(cursor.getString(cursor.getColumnIndex(MOVIES_COLUMN_TITLE)), cursor.getString(cursor.getColumnIndex(MOVIES_COLUMN_ACTORS)), cursor.getString(cursor.getColumnIndex(MOVIES_COLUMN_DIRECTOR)),
