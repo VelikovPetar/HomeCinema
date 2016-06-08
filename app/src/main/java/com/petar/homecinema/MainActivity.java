@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
      * @param view
      */
     public void search(View view) {
-        ArrayList<Movie> movies = dbh.searchByTitle("Departed");
+//        ArrayList<Movie> movies = dbh.searchByTitle("Departed");
         Toast.makeText(this, String.valueOf(dbh.numberOfMovies()), Toast.LENGTH_LONG).show();
 //        int i = 1;
 //        for(Movie m : movies) {
