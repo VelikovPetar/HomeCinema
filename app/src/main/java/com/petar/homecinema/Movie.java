@@ -17,4 +17,9 @@ public class Movie {
         this.actors = actors;
         this.title = title;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s\t%s\t%s\t%s\t%d\n", title, actors, director, genre, box);
+    }
 }

@@ -5,14 +5,21 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends Activity {
+
+    DBHelper dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbh = new DBHelper(this);
     }
 
     @Override
@@ -35,5 +42,29 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Basic testing of the inserting into the DB
+     * @param view
+     */
+    public void addMovie(View view) {
+        Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+        Movie m = new Movie("Departed", "Mat Damon, Leonardo DiCaprio", "...", "drama, crime", 1);
+        dbh.insertMovie(m);
+        Toast.makeText(this, "Inserted", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Basic testing of the searching in the DB
+     * @param view
+     */
+    public void search(View view) {
+        ArrayList<Movie> movies = dbh.searchByTitle("Departed");
+        Toast.makeText(this, String.valueOf(dbh.numberOfMovies()), Toast.LENGTH_LONG).show();
+//        int i = 1;
+//        for(Movie m : movies) {
+//            Toast.makeText(this, i++ + ". " + m.toString(), Toast.LENGTH_LONG).show();
+//        }
     }
 }

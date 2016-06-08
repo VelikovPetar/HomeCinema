@@ -74,4 +74,8 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return result;
     }
+
+    public long numberOfMovies() {
+        return getReadableDatabase().rawQuery("select * from " + MOVIES_TABLE_NAME, null).getCount();
+    }
 }
