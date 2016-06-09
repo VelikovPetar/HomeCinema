@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +17,9 @@ import java.util.ArrayList;
  */
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "MovieDatabase.db";
+    public static final String DB_PATH = "/data/data/com.petar.homecinema/databases/";
+    public static final String DB_NAME = "MovieDatabase.db";
+
     public static final String MOVIES_TABLE_NAME = "movies";
     public static final String MOVIES_COLUMN_ID = "_id";
     public static final String MOVIES_COLUMN_TITLE = "title";
@@ -22,22 +28,69 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String MOVIES_COLUMN_GENRE = "genre";
     public static final String MOVIES_COLUMN_BOX = "box";
 
+    private Context context;
+    private boolean toCreate = false, toUpgrade = false;
+
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DB_NAME, null, 1);
+        this.context = context;
+    }
+
+    private void copyDatabase(SQLiteDatabase db) {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = this.context.getAssets().open(DB_PATH + DB_NAME);
+            os = new FileOutputStream(db.getPath());
+            int length;
+            byte[] buffer = new byte[1024];
+            while((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+            os.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new Error("Error copying database!");
+        } finally {
+            if(is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new Error("Error closing InputStream!");
+                }
+            }
+            if(os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new Error("Error closing OutputStream!");
+                }
+            }
+        }
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createDatabase = "create table " + MOVIES_TABLE_NAME + "(" + MOVIES_COLUMN_ID + " integer primary key, "
-                + MOVIES_COLUMN_TITLE + " text not null, " + MOVIES_COLUMN_ACTORS + " text, "
-                + MOVIES_COLUMN_DIRECTOR + " text, " + MOVIES_COLUMN_GENRE + " text, "
-                + MOVIES_COLUMN_BOX + " integer not null);";
-        db.execSQL(createDatabase);
+        toCreate = true;
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // TODO:
+        toUpgrade = true;
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        if(toCreate) {
+            copyDatabase(db);
+            toCreate = false;
+        }
+        if(toUpgrade) {
+            // TODO Implement upgrade of database
+        }
     }
 
     public void insertMovie(Movie movie) {
