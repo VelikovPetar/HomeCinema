@@ -1,7 +1,6 @@
 package com.petar.homecinema;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,13 +12,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-    DBHelper dbh;
+    DatabaseAccess da;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbh = new DBHelper(this);
+        da = DatabaseAccess.getInstance(this);
+        da.open();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
     public void addMovie(View view) {
         Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
         Movie m = new Movie("Departed", "Mat Damon, Leonardo DiCaprio", "...", "drama, crime", 1);
-        dbh.insertMovie(m);
+        //dbh.insertMovie(m);
         Toast.makeText(this, "Inserted", Toast.LENGTH_SHORT).show();
     }
 
@@ -60,8 +60,8 @@ public class MainActivity extends Activity {
      * @param view
      */
     public void search(View view) {
-//        ArrayList<Movie> movies = dbh.searchByTitle("Departed");
-        Toast.makeText(this, String.valueOf(dbh.numberOfMovies()), Toast.LENGTH_LONG).show();
+        ArrayList<Movie> movies = da.searchByTitle("Alien");
+        Toast.makeText(this, String.valueOf(movies.size()), Toast.LENGTH_LONG).show();
 //        int i = 1;
 //        for(Movie m : movies) {
 //            Toast.makeText(this, i++ + ". " + m.toString(), Toast.LENGTH_LONG).show();
