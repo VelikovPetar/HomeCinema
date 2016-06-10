@@ -7,12 +7,12 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 /**
  * Created by petar on 6/10/16.
  */
-public class DatabaseOpenHelper extends SQLiteAssetHelper {
+public class DatabaseAssetHelper extends SQLiteAssetHelper {
 
     private static final String DB_NAME = "MovieDatabase.sqlite";
     private static final int DB_VERSION = 1;
 
-    public DatabaseOpenHelper(Context context) {
+    public DatabaseAssetHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 }

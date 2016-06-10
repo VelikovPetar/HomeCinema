@@ -47,11 +47,13 @@ public class MainActivity extends Activity {
     /**
      * Basic testing of the inserting into the DB
      * @param view
+     * TODO: To be implemented
      */
     public void addMovie(View view) {
         Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
         Movie m = new Movie("Departed", "Mat Damon, Leonardo DiCaprio", "...", "drama, crime", 1);
-        //dbh.insertMovie(m);
+        // TODO: To be implemented
+        // da.addMovie(m);
         Toast.makeText(this, "Inserted", Toast.LENGTH_SHORT).show();
     }
 
@@ -62,9 +64,5 @@ public class MainActivity extends Activity {
     public void search(View view) {
         ArrayList<Movie> movies = da.searchByTitle("Alien");
         Toast.makeText(this, String.valueOf(movies.size()), Toast.LENGTH_LONG).show();
-//        int i = 1;
-//        for(Movie m : movies) {
-//            Toast.makeText(this, i++ + ". " + m.toString(), Toast.LENGTH_LONG).show();
-//        }
     }
 }

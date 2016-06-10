@@ -32,7 +32,7 @@ public class DatabaseAccess {
     }
 
     private DatabaseAccess(Context context) {
-        openHelper = new DatabaseOpenHelper(context);
+        openHelper = new DatabaseAssetHelper(context);
     }
 
     public void open() {
