@@ -129,19 +129,10 @@
             />
     </TableRow>
 
-    <TableRow>
-
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-        </ListView>
-
-        <TextView
-            android:layout_weight="0"
-            />
-
-    </TableRow>
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </TableLayout>
