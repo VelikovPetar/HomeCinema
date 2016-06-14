@@ -14,4 +14,6 @@
     <string name="enter_genre">Enter genre</string>
     <string name="box_number">Box number</string>
     <string name="enter_box_number">Enter box number</string>
+    <string name="search_button">Search Button</string>
+    <string name="search">Search</string>
 </resources>

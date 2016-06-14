@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,7 @@ public class DatabaseAccess {
     private SQLiteDatabase database;
     private SQLiteOpenHelper openHelper;
 
-    public static DatabaseAccess getInstance(Context context) {
+    public static synchronized DatabaseAccess getInstance(Context context) {
         if(instance == null) {
             instance = new DatabaseAccess(context);
         }
@@ -45,6 +47,11 @@ public class DatabaseAccess {
         }
     }
 
+    /**
+     * TODO Modify to search by all parameters
+     * @param title
+     * @return
+     */
     public ArrayList<Movie> searchByTitle(String title) {
         ArrayList<Movie> result = new ArrayList<>();
         SQLiteDatabase db = openHelper.getReadableDatabase();
