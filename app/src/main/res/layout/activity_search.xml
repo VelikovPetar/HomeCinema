@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/search_movie_by"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        />
+
+    <TableRow>
+
+        <TextView
+            android:text="@string/title"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:text="@string/enter_title"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="10sp"
+            android:inputType="text"
+            />
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:text="@string/actors"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:text="@string/enter_actors"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="10sp"
+            android:inputType="text"
+            />
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:text="@string/director"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:text="@string/enter_director"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="10sp"
+            android:inputType="text"
+            />
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:text="@string/genre"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:text="@string/enter_genre"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="10sp"
+            android:inputType="text"
+            />
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:text="@string/box_number"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:text="@string/enter_box_number"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="10sp"
+            android:inputType="number"
+            />
+    </TableRow>
+
+    <TableRow>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </ListView>
+
+        <TextView
+            android:layout_weight="0"
+            />
+
+    </TableRow>
+
+</TableLayout>

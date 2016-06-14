@@ -3,4 +3,15 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="search_movie_by">Search movie by:</string>
+    <string name="title">Title</string>
+    <string name="enter_title">Enter title</string>
+    <string name="actors">Actors</string>
+    <string name="enter_actors">Enter actors</string>
+    <string name="director">Director</string>
+    <string name="enter_director">Enter director</string>
+    <string name="genre">Genre</string>
+    <string name="enter_genre">Enter genre</string>
+    <string name="box_number">Box number</string>
+    <string name="enter_box_number">Enter box number</string>
 </resources>
