@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
     DatabaseAccess da;
+    Button openSearchActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +19,15 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         da = DatabaseAccess.getInstance(this);
         da.open();
+        // TODO Rename IDs
+        openSearchActivity = (Button) findViewById(R.id.button);
+        openSearchActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -41,21 +52,4 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Basic testing of the inserting into the DB
-     * @param view
-     * TODO: To be implemented
-     */
-    public void openSearchActivity(View view) {
-        Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Basic testing of the searching in the DB
-     * @param view
-     */
-    public void search(View view) {
-
-    }
 }
