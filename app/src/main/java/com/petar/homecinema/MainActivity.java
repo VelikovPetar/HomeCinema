@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
@@ -49,14 +46,9 @@ public class MainActivity extends Activity {
      * @param view
      * TODO: To be implemented
      */
-    public void addMovie(View view) {
-        Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
-        //Movie m = new Movie("Departed", "Mat Damon, Leonardo DiCaprio", "...", "drama, crime", 1);
-        // TODO: To be implemented
-        // da.addMovie(m);
+    public void openSearchActivity(View view) {
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
-        Toast.makeText(this, "Inserted", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -64,7 +56,6 @@ public class MainActivity extends Activity {
      * @param view
      */
     public void search(View view) {
-        ArrayList<Movie> movies = da.searchByTitle("Alien");
-        Toast.makeText(this, String.valueOf(movies.size()), Toast.LENGTH_LONG).show();
+
     }
 }
