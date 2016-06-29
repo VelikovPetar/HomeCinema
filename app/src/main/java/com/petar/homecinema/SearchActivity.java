@@ -1,7 +1,9 @@
 package com.petar.homecinema;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -86,9 +88,10 @@ public class SearchActivity extends Activity {
             director = editTextDirector.getText().toString();
             genre = editTextGenre.getText().toString();
             boxNumber = editTextBoxNumber.getText().toString();
-            //Toast.makeText(SearchActivity.this, title + " " + " " + actors + " " + " " + director + " " + genre + " " + boxNumber, Toast.LENGTH_SHORT).show();
-            String num = String.valueOf(da.searchByTitle(title).size());
-            Toast.makeText(SearchActivity.this, num, Toast.LENGTH_LONG).show();
+
+            String[] params = new String[]{title, actors, director, genre, boxNumber};
+            int count = da.search(params).getCount();
+            Toast.makeText(SearchActivity.this, String.valueOf(count), Toast.LENGTH_LONG).show();
         }
     }
 

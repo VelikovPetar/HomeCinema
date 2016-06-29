@@ -48,24 +48,19 @@ public class DatabaseAccess {
     }
 
     /**
-     * TODO Modify to search by all parameters
-     * @param title
-     * @return
+     * Method that searches the database for instances that contain the entered parameters
+     * @param params Entered parameters to search by
+     * @return Cursor pointing to the fetched rows from the database
      */
-    public ArrayList<Movie> searchByTitle(String title) {
-        ArrayList<Movie> result = new ArrayList<>();
-        SQLiteDatabase db = openHelper.getReadableDatabase();
-        String getMoviesByTitle = "select * from " + MOVIES_TABLE_NAME + " where " + MOVIES_COLUMN_TITLE + " like " + "'%" + title + "%';";
-        Cursor cursor = db.rawQuery(getMoviesByTitle, null);
-        //cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, "title like '%?%'", new String[]{title}, null, null, null);
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast()) {
-            Movie movie = new Movie(cursor.getString(cursor.getColumnIndex(MOVIES_COLUMN_TITLE)), cursor.getString(cursor.getColumnIndex(MOVIES_COLUMN_ACTORS)), cursor.getString(cursor.getColumnIndex(MOVIES_COLUMN_DIRECTOR)),
-                    cursor.getString(cursor.getColumnIndex(MOVIES_COLUMN_GENRE)), cursor.getInt(cursor.getColumnIndex(MOVIES_COLUMN_BOX)));
-            result.add(movie);
-            cursor.moveToNext();
+    public Cursor search(String[] params) {
+        String whereQuery = "title like ? AND actors like ? AND director like ? AND genre like ? AND box like ?";
+        for(int i = 0; i < params.length; ++i) {
+            params[i] = String.format("%%%s%%", params[i]);
         }
-        cursor.close();
-        return result;
+        Cursor cursor;
+        SQLiteDatabase db = openHelper.getReadableDatabase();
+        cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, whereQuery, params, null, null, null);
+        return cursor;
     }
+
 }

@@ -8,9 +8,9 @@ public class Movie {
     public String actors;
     public String director;
     public String genre;
-    public int box;
+    public String box;
 
-    public Movie(String title, String actors, String director, String genre, int box) {
+    public Movie(String title, String actors, String director, String genre, String box) {
         this.box = box;
         this.genre = genre;
         this.director = director;
@@ -20,6 +20,6 @@ public class Movie {
 
     @Override
     public String toString() {
-        return String.format("%s\t%s\t%s\t%s\t%d\n", title, actors, director, genre, box);
+        return String.format("%s\t%s\t%s\t%s\t%s\n", title, actors, director, genre, box);
     }
 }
