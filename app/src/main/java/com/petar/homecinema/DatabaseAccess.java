@@ -55,7 +55,7 @@ public class DatabaseAccess {
         }
         Cursor cursor;
         SQLiteDatabase db = openHelper.getReadableDatabase();
-        cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, whereQuery, params, null, null, null);
+        cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_ID, MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, whereQuery, params, null, null, null);
         return cursor;
     }
 

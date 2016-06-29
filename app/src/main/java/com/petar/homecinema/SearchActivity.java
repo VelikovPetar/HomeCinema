@@ -1,6 +1,7 @@
 package com.petar.homecinema;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -82,8 +83,9 @@ public class SearchActivity extends Activity {
             String boxNumber = editTextBoxNumber.getText().toString();
 
             String[] params = new String[]{title, actors, director, genre, boxNumber};
-            int count = da.search(params).getCount();
-            Toast.makeText(SearchActivity.this, String.valueOf(count), Toast.LENGTH_LONG).show();
+            Cursor cursor = da.search(params);
+            MovieCursorAdapter mca = new MovieCursorAdapter(SearchActivity.this, cursor);
+            resultsList.setAdapter(mca);
         }
     }
 
