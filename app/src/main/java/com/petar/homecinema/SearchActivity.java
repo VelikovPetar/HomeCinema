@@ -1,9 +1,7 @@
 package com.petar.homecinema;
 
 import android.app.Activity;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -15,11 +13,6 @@ import android.widget.Toast;
  */
 public class SearchActivity extends Activity {
 
-    private String title;
-    private String actors;
-    private String director;
-    private String genre;
-    private String boxNumber;
     private EditText editTextTitle;
     private EditText editTextActors;
     private EditText editTextDirector;
@@ -70,7 +63,6 @@ public class SearchActivity extends Activity {
     /**
      * When pressed, search the database for entries matching the given parameters in the
      * appropriate input fields.
-     * TODO: Only searches by title, implement it to search by all parameters (method search(parameters[]) in DatabaseAccess class)
      */
     private class SearchButtonHandler implements View.OnClickListener {
 
@@ -83,11 +75,11 @@ public class SearchActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            title = editTextTitle.getText().toString();
-            actors = editTextActors.getText().toString();
-            director = editTextDirector.getText().toString();
-            genre = editTextGenre.getText().toString();
-            boxNumber = editTextBoxNumber.getText().toString();
+            String title = editTextTitle.getText().toString();
+            String actors = editTextActors.getText().toString();
+            String director = editTextDirector.getText().toString();
+            String genre = editTextGenre.getText().toString();
+            String boxNumber = editTextBoxNumber.getText().toString();
 
             String[] params = new String[]{title, actors, director, genre, boxNumber};
             int count = da.search(params).getCount();
