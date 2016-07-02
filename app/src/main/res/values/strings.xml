@@ -17,4 +17,6 @@
     <string name="search_button">Search Button</string>
     <string name="search">Search</string>
     <string name="search_movie">Search Movie</string>
+    <string name="insert">Insert</string>
+    <string name="insert_movie">Insert movie</string>
 </resources>

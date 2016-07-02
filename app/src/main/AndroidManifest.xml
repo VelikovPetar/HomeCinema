@@ -20,6 +20,10 @@
             android:name=".SearchActivity"
             android:label="Search movie">
         </activity>
+        <activity
+            android:name=".InsertActivity"
+            android:label="Insert movie">
+        </activity>
     </application>
 
 </manifest>

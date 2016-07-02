@@ -12,13 +12,16 @@ public class MainActivity extends Activity {
 
     DatabaseAccess da;
     Button openSearchActivity;
+    Button openInsertActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         da = DatabaseAccess.getInstance(this);
         da.open();
+
         // TODO Rename IDs
         openSearchActivity = (Button) findViewById(R.id.button);
         openSearchActivity.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +31,16 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        openInsertActivity = (Button) findViewById(R.id.button2);
+        openInsertActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, InsertActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
