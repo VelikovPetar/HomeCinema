@@ -23,7 +23,7 @@ public class SearchActivity extends Activity {
 
     private DatabaseAccess da;
     private MovieCursorAdapter mca;
-
+    private Cursor allMoviesCursor;
 
 
     @Override
@@ -32,6 +32,8 @@ public class SearchActivity extends Activity {
         setContentView(R.layout.activity_search);
 
         da = DatabaseAccess.getInstance(this);
+        allMoviesCursor = da.search(null);
+        mca = new MovieCursorAdapter(SearchActivity.this, allMoviesCursor);
         initializeUI();
 
     }
@@ -79,10 +81,6 @@ public class SearchActivity extends Activity {
 
         // ListView where to display the matching results from the search
         resultsList = (ListView) findViewById(R.id.list_view);
-
-        // Initially display all movies in the database
-        Cursor cursor = da.search(null);
-        mca = new MovieCursorAdapter(SearchActivity.this, cursor);
         resultsList.setAdapter(mca);
     }
 
