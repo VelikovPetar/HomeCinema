@@ -42,4 +42,10 @@ public class MovieCursorAdapter extends CursorAdapter {
         genreView.setText(genre);
         boxNumberView.setText(boxNumber);
     }
+
+    @Override
+    public Cursor swapCursor(Cursor newCursor) {
+        return super.swapCursor(newCursor);
+    }
+
 }

@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         da.open();
 
         // TODO Rename IDs
-        openSearchActivity = (Button) findViewById(R.id.button);
+        openSearchActivity = (Button) findViewById(R.id.search_activity_button);
         openSearchActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        openInsertActivity = (Button) findViewById(R.id.button2);
+        openInsertActivity = (Button) findViewById(R.id.insert_activity_button);
         openInsertActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

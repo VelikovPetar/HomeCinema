@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Created by petar on 6/14/16.
@@ -23,6 +22,9 @@ public class SearchActivity extends Activity {
     private ListView resultsList;
 
     private DatabaseAccess da;
+    private MovieCursorAdapter mca;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +73,17 @@ public class SearchActivity extends Activity {
 
                 String[] params = new String[]{title, actors, director, genre, boxNumber};
                 Cursor cursor = da.search(params);
-                MovieCursorAdapter mca = new MovieCursorAdapter(SearchActivity.this, cursor);
-                resultsList.setAdapter(mca);
+                mca.changeCursor(cursor);
             }
         });
 
         // ListView where to display the matching results from the search
         resultsList = (ListView) findViewById(R.id.list_view);
+
+        // Initially display all movies in the database
+        Cursor cursor = da.search(null);
+        mca = new MovieCursorAdapter(SearchActivity.this, cursor);
+        resultsList.setAdapter(mca);
     }
 
 }

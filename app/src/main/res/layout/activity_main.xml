@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search_movie"
-        android:id="@+id/button"
+        android:id="@+id/search_activity_button"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"/>
@@ -22,10 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Insert Movie"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
+        android:id="@+id/insert_activity_button"
+        android:layout_below="@+id/search_activity_button"
+        android:layout_alignLeft="@+id/search_activity_button"
+        android:layout_alignStart="@+id/search_activity_button"
         android:layout_marginTop="98dp"/>
 
 </RelativeLayout>

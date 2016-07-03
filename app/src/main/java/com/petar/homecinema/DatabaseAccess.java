@@ -46,17 +46,21 @@ public class DatabaseAccess {
 
     /**
      * Method that searches the database for instances that contain the entered parameters.
-     * @param params Entered parameters to search by
+     * @param params Entered parameters to search by, if params == null, retrieves every entry in the database
      * @return Cursor pointing to the retrieved rows from the database
      */
     public Cursor search(String[] params) {
-        String whereQuery = "title like ? AND actors like ? AND director like ? AND genre like ? AND box like ?";
-        for(int i = 0; i < params.length; ++i) {
-            params[i] = String.format("%%%s%%", params[i]);
-        }
         Cursor cursor;
         SQLiteDatabase db = openHelper.getReadableDatabase();
-        cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_ID, MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, whereQuery, params, null, null, null);
+        if(params != null) {
+            String whereQuery = "title like ? AND actors like ? AND director like ? AND genre like ? AND box like ?";
+            for (int i = 0; i < params.length; ++i) {
+                params[i] = String.format("%%%s%%", params[i]);
+            }
+            cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_ID, MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, whereQuery, params, null, null, null);
+        } else {
+            cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_ID, MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, null, null, null, null, null);
+        }
         return cursor;
     }
 
