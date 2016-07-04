@@ -52,15 +52,14 @@ public class DatabaseAccess {
     public Cursor search(String[] params) {
         Cursor cursor;
         SQLiteDatabase db = openHelper.getReadableDatabase();
+        String whereQuery = null;
         if(params != null) {
-            String whereQuery = "title like ? AND actors like ? AND director like ? AND genre like ? AND box like ?";
+            whereQuery = "title like ? AND actors like ? AND director like ? AND genre like ? AND box like ?";
             for (int i = 0; i < params.length; ++i) {
                 params[i] = String.format("%%%s%%", params[i]);
             }
-            cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_ID, MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, whereQuery, params, null, null, null);
-        } else {
-            cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_ID, MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, null, null, null, null, null);
         }
+        cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_ID, MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, whereQuery, params, null, null, null);
         return cursor;
     }
 
