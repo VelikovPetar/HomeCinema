@@ -37,9 +37,16 @@ public class MovieCursorAdapter extends CursorAdapter {
         String boxNumber = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseAccess.MOVIES_COLUMN_BOX));
 
         titleView.setText(title);
+
         actorsView.setText(actors);
+        actorsView.setVisibility(View.GONE);
+
         directorView.setText(director);
+        directorView.setVisibility(View.GONE);
+
         genreView.setText(genre);
+        genreView.setVisibility(View.GONE);
+
         boxNumberView.setText(boxNumber);
     }
 

@@ -3,10 +3,14 @@ package com.petar.homecinema;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by petar on 6/14/16.
@@ -20,6 +24,7 @@ public class SearchActivity extends Activity {
     private EditText editTextBoxNumber;
     private Button searchButton;
     private ListView resultsList;
+    private int clickedItemPosition;
 
     private DatabaseAccess da;
     private MovieCursorAdapter mca;
@@ -82,6 +87,64 @@ public class SearchActivity extends Activity {
         // ListView where to display the matching results from the search
         resultsList = (ListView) findViewById(R.id.list_view);
         resultsList.setAdapter(mca);
+
+        clickedItemPosition = -1;
+        resultsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                TextView actorsView = (TextView) view.findViewById(R.id.movie_list_item_actors);
+                TextView directorView = (TextView) view.findViewById(R.id.movie_list_item_director);
+                TextView genreView = (TextView) view.findViewById(R.id.movie_list_item_genre);
+
+                if(clickedItemPosition != -1 && clickedItemPosition != position) {
+                    // If there was a previously clicked item, clicking on a new item, results in hiding the extra info for the previous item,
+                    // and displaying extra info for the new item
+                    int firstVisibleViewPosition = resultsList.getFirstVisiblePosition();
+                    int newPosition = clickedItemPosition - firstVisibleViewPosition;
+
+                    View previousClickedView = resultsList.getChildAt(newPosition);
+
+                    TextView previousActorsView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_actors);
+                    TextView previousDirectorView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_director);
+                    TextView previousGenreView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_genre);
+
+                    previousActorsView.setVisibility(View.GONE);
+                    previousDirectorView.setVisibility(View.GONE);
+                    previousGenreView.setVisibility(View.GONE);
+
+                    actorsView.setVisibility(View.VISIBLE);
+                    directorView.setVisibility(View.VISIBLE);
+                    genreView.setVisibility(View.VISIBLE);
+
+                    clickedItemPosition = position;
+                } else if(clickedItemPosition == position) {
+                    // When clicking on an item that already displays the extra info, hide the extra info
+                    if(actorsView.getVisibility() == View.GONE) {
+                        actorsView.setVisibility(View.VISIBLE);
+                    } else {
+                        actorsView.setVisibility(View.GONE);
+                    }
+                    if(directorView.getVisibility() == View.GONE) {
+                        directorView.setVisibility(View.VISIBLE);
+                    } else {
+                        directorView.setVisibility(View.GONE);
+                    }
+                    if(genreView.getVisibility() == View.GONE) {
+                        genreView.setVisibility(View.VISIBLE);
+                    } else {
+                        genreView.setVisibility(View.GONE);
+                    }
+                } else {
+                    // The first item clicked, results in displaying the extra info for that item
+                    actorsView.setVisibility(View.VISIBLE);
+                    directorView.setVisibility(View.VISIBLE);
+                    genreView.setVisibility(View.VISIBLE);
+
+                    clickedItemPosition = position;
+                }
+            }
+        });
     }
 
 }
