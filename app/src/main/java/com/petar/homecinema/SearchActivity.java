@@ -64,7 +64,7 @@ public class SearchActivity extends Activity {
         editTextBoxNumber.setMaxWidth(maxWidth);
 
         // Search button
-        //When pressed, searches the database for entries mathing the entered parameters,
+        //When pressed, searches the database for entries matching the entered parameters,
         //and displays them in a ListView
         searchButton = (Button) findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -99,17 +99,21 @@ public class SearchActivity extends Activity {
                     // If there was a previously clicked item, clicking on a new item, results in hiding the extra info for the previous item,
                     // and displaying extra info for the new item
                     int firstVisibleViewPosition = resultsList.getFirstVisiblePosition();
-                    int newPosition = clickedItemPosition - firstVisibleViewPosition;
+                    int lastVisibleViewPosition = resultsList.getLastVisiblePosition();
 
-                    View previousClickedView = resultsList.getChildAt(newPosition);
+                    if(clickedItemPosition >= firstVisibleViewPosition && clickedItemPosition <= lastVisibleViewPosition) {
+                        int newPosition = clickedItemPosition - firstVisibleViewPosition;
 
-                    TextView previousActorsView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_actors);
-                    TextView previousDirectorView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_director);
-                    TextView previousGenreView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_genre);
+                        View previousClickedView = resultsList.getChildAt(newPosition);
 
-                    previousActorsView.setVisibility(View.GONE);
-                    previousDirectorView.setVisibility(View.GONE);
-                    previousGenreView.setVisibility(View.GONE);
+                        TextView previousActorsView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_actors);
+                        TextView previousDirectorView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_director);
+                        TextView previousGenreView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_genre);
+
+                        previousActorsView.setVisibility(View.GONE);
+                        previousDirectorView.setVisibility(View.GONE);
+                        previousGenreView.setVisibility(View.GONE);
+                    }
 
                     actorsView.setVisibility(View.VISIBLE);
                     directorView.setVisibility(View.VISIBLE);
