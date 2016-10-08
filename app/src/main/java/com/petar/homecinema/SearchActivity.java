@@ -88,12 +88,16 @@ public class SearchActivity extends Activity {
 
         clickedItemPosition = -1;
         resultsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            //TODO: Refactor code
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 TextView actorsView = (TextView) view.findViewById(R.id.movie_list_item_actors);
                 TextView directorView = (TextView) view.findViewById(R.id.movie_list_item_director);
                 TextView genreView = (TextView) view.findViewById(R.id.movie_list_item_genre);
+                TextView boxNumberView = (TextView) view.findViewById(R.id.movie_list_item_boxNumber);
 
                 if(clickedItemPosition != -1 && clickedItemPosition != position) {
                     // If there was a previously clicked item, clicking on a new item, results in hiding the extra info for the previous item,
@@ -109,43 +113,58 @@ public class SearchActivity extends Activity {
                         TextView previousActorsView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_actors);
                         TextView previousDirectorView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_director);
                         TextView previousGenreView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_genre);
+                        TextView previousBoxNumberView = (TextView) previousClickedView.findViewById(R.id.movie_list_item_boxNumber);
 
                         previousActorsView.setVisibility(View.GONE);
                         previousDirectorView.setVisibility(View.GONE);
                         previousGenreView.setVisibility(View.GONE);
+                        previousBoxNumberView.setVisibility(View.GONE);
                     }
 
                     actorsView.setVisibility(View.VISIBLE);
                     directorView.setVisibility(View.VISIBLE);
                     genreView.setVisibility(View.VISIBLE);
+                    boxNumberView.setVisibility(View.VISIBLE);
 
                     clickedItemPosition = position;
+
                 } else if(clickedItemPosition == position) {
                     // When clicking on an item that already displays the extra info, hide the extra info
-                    if(actorsView.getVisibility() == View.GONE) {
-                        actorsView.setVisibility(View.VISIBLE);
-                    } else {
-                        actorsView.setVisibility(View.GONE);
-                    }
-                    if(directorView.getVisibility() == View.GONE) {
-                        directorView.setVisibility(View.VISIBLE);
-                    } else {
-                        directorView.setVisibility(View.GONE);
-                    }
-                    if(genreView.getVisibility() == View.GONE) {
-                        genreView.setVisibility(View.VISIBLE);
-                    } else {
-                        genreView.setVisibility(View.GONE);
-                    }
+                    toggleView(actorsView, directorView, genreView, boxNumberView);
                 } else {
                     // The first item clicked, results in displaying the extra info for that item
                     actorsView.setVisibility(View.VISIBLE);
                     directorView.setVisibility(View.VISIBLE);
                     genreView.setVisibility(View.VISIBLE);
+                    boxNumberView.setVisibility(View.VISIBLE);
 
                     clickedItemPosition = position;
                 }
             }
+
+            private void toggleView(TextView actorsView, TextView directorView, TextView genreView, TextView boxNumberView) {
+                if(actorsView.getVisibility() == View.GONE) {
+                    actorsView.setVisibility(View.VISIBLE);
+                } else {
+                    actorsView.setVisibility(View.GONE);
+                }
+                if(directorView.getVisibility() == View.GONE) {
+                    directorView.setVisibility(View.VISIBLE);
+                } else {
+                    directorView.setVisibility(View.GONE);
+                }
+                if(genreView.getVisibility() == View.GONE) {
+                    genreView.setVisibility(View.VISIBLE);
+                } else {
+                    genreView.setVisibility(View.GONE);
+                }
+                if(boxNumberView.getVisibility() == View.GONE) {
+                    boxNumberView.setVisibility(View.VISIBLE);
+                } else {
+                    boxNumberView.setVisibility(View.GONE);
+                }
+            }
+
         });
     }
 

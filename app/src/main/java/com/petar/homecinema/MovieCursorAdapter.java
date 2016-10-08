@@ -27,11 +27,13 @@ public class MovieCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
+        //TODO: Set pleasant colors
         if((cursor.getPosition() & 1) == 0) {
-            view.setBackgroundColor(Color.GREEN);
+            view.setBackgroundResource(R.drawable.round_corner_color1);
         } else {
-            view.setBackgroundColor(Color.WHITE);
+            view.setBackgroundResource(R.drawable.round_corner_color2);
         }
+
         TextView titleView = (TextView) view.findViewById(R.id.movie_list_item_title);
         TextView actorsView = (TextView) view.findViewById(R.id.movie_list_item_actors);
         TextView directorView = (TextView) view.findViewById(R.id.movie_list_item_director);
@@ -56,6 +58,7 @@ public class MovieCursorAdapter extends CursorAdapter {
         genreView.setVisibility(View.GONE);
 
         boxNumberView.setText(boxNumber);
+        boxNumberView.setVisibility(View.GONE);
     }
 
 
