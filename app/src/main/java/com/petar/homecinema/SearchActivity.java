@@ -85,9 +85,13 @@ public class SearchActivity extends Activity {
             String genre = editTextGenre.getText().toString();
             String boxNumber = editTextBoxNumber.getText().toString();
 
+            // Change the cursor of the MovieCursorAdapter and close the old one
             String[] params = new String[]{title, actors, director, genre, boxNumber};
             Cursor cursor = da.search(params);
-            mca.changeCursor(cursor);
+            Cursor oldCursor = mca.swapCursor(cursor);
+            if(oldCursor != null) {
+                oldCursor.close();
+            }
         }
     }
 

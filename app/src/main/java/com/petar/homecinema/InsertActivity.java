@@ -87,6 +87,7 @@ public class InsertActivity extends Activity {
                 Toast.makeText(InsertActivity.this, "Movie with the same name already exists!", Toast.LENGTH_LONG).show();
                 return;
             }
+            cursor.close();
 
             String[] params = new String[]{title, actors, director, genre, boxNumber};
             long error = da.insert(params);
