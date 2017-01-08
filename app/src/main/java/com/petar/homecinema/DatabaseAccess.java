@@ -67,7 +67,6 @@ public class DatabaseAccess {
      * Method that inserts a new Movie to the database.
      * @param params Attributes of the new database entry
      * @return Row id if successful, -1 if not successful
-     * TODO: Check if the movie to be inserted already exists.
      */
     public long insert(String[] params) {
         SQLiteDatabase db = openHelper.getWritableDatabase();

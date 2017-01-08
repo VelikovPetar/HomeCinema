@@ -1,6 +1,7 @@
 package com.petar.homecinema;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -56,36 +57,45 @@ public class InsertActivity extends Activity {
         // When pressed, inserts new movie into the database, with the entered attributes
         // The values for 'Title' and 'Box number' cannot be omitted
         insertButton = (Button) findViewById(R.id.insert_button);
-        insertButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String title = editTextTitle.getText().toString();
-                String actors = editTextActors.getText().toString();
-                String director = editTextDirector.getText().toString();
-                String genre = editTextGenre.getText().toString();
-                String boxNumber = editTextBoxNumber.getText().toString();
+        insertButton.setOnClickListener(new InsertButtonHandler());
+    }
 
-                // Check if required parameters are entered
-                if(title.trim().equals("") && boxNumber.trim().equals("")) {
-                    Toast.makeText(InsertActivity.this, "You must enter Title and Box Number!", Toast.LENGTH_LONG).show();
-                    return;
-                } else if(title.trim().equals("")) {
-                    Toast.makeText(InsertActivity.this, "You must enter Title!", Toast.LENGTH_LONG).show();
-                    return;
-                } else if(boxNumber.trim().equals("")) {
-                    Toast.makeText(InsertActivity.this, "You must enter BoxNumber!", Toast.LENGTH_LONG).show();
-                    return;
-                }
+    private class InsertButtonHandler implements View.OnClickListener {
 
-                String[] params = new String[]{title, actors, director, genre, boxNumber};
-                long error = da.insert(params);
-                if(error == -1) {
-                    Toast.makeText(InsertActivity.this, "An error occurred while inserting the movie to the database!\nPlease try again.", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(InsertActivity.this, "Successfully inserted movie!", Toast.LENGTH_LONG).show();
-                }
+        @Override
+        public void onClick(View v) {
+            String title = editTextTitle.getText().toString();
+            String actors = editTextActors.getText().toString();
+            String director = editTextDirector.getText().toString();
+            String genre = editTextGenre.getText().toString();
+            String boxNumber = editTextBoxNumber.getText().toString();
+
+            // Check if required parameters are entered
+            if(title.trim().equals("") && boxNumber.trim().equals("")) {
+                Toast.makeText(InsertActivity.this, "You must enter Title and Box Number!", Toast.LENGTH_LONG).show();
+                return;
+            } else if(title.trim().equals("")) {
+                Toast.makeText(InsertActivity.this, "You must enter Title!", Toast.LENGTH_LONG).show();
+                return;
+            } else if(boxNumber.trim().equals("")) {
+                Toast.makeText(InsertActivity.this, "You must enter BoxNumber!", Toast.LENGTH_LONG).show();
+                return;
             }
-        });
+
+            Cursor cursor = da.search(new String[]{title, "", "", "", ""});
+            if(cursor.getCount() > 0) {
+                Toast.makeText(InsertActivity.this, "Movie with the same name already exists!", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            String[] params = new String[]{title, actors, director, genre, boxNumber};
+            long error = da.insert(params);
+            if(error == -1) {
+                Toast.makeText(InsertActivity.this, "An error occurred while inserting the movie to the database!\nPlease try again.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(InsertActivity.this, "Successfully inserted movie!", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }
