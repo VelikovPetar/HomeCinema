@@ -47,7 +47,7 @@ public class DatabaseAccess {
     /**
      * Method that searches the database for instances that contain the entered parameters.
      * @param params Entered parameters to search by, if params == null, retrieves every entry in the database
-     * @return Cursor pointing to the retrieved rows from the database
+     * @return Cursor pointing to the retrieved rows from the database. The rows are sorted by movie title
      */
     public Cursor search(String[] params) {
         Cursor cursor;
@@ -59,7 +59,7 @@ public class DatabaseAccess {
                 params[i] = String.format("%%%s%%", params[i]);
             }
         }
-        cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_ID, MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, whereQuery, params, null, null, null);
+        cursor = db.query(MOVIES_TABLE_NAME, new String[]{MOVIES_COLUMN_ID, MOVIES_COLUMN_TITLE, MOVIES_COLUMN_ACTORS, MOVIES_COLUMN_DIRECTOR, MOVIES_COLUMN_GENRE, MOVIES_COLUMN_BOX}, whereQuery, params, null, null, MOVIES_COLUMN_TITLE, null);
         return cursor;
     }
 
