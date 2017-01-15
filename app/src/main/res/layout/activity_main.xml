@@ -3,7 +3,9 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:background="#70c6ea">
 
     <Button
         android:layout_width="wrap_content"
@@ -13,18 +15,20 @@
         android:layout_marginBottom="136dp"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/insert_activity_button"
-        android:layout_toEndOf="@+id/insert_activity_button" />
+        android:layout_toEndOf="@+id/insert_activity_button"
+        android:background="@drawable/main_activity_button_shape"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Insert Movie"
+        android:text="@string/insert_movie"
         android:id="@+id/insert_activity_button"
         android:layout_alignTop="@+id/search_activity_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp" />
+        android:layout_marginStart="50dp"
+        android:background="@drawable/main_activity_button_shape"/>
 
     <ImageView
         android:layout_width="wrap_content"
